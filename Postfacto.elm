@@ -8,7 +8,8 @@ import String exposing(..)
 type alias Post =
     {
         id: Int,
-        value : String
+        value : String,
+        likes : Int
     }
 type alias Model =
     {
@@ -29,7 +30,8 @@ model  =
 
 type Msg = Change String|
             Add String|
-            Delete Int
+            Delete Int|
+            Upvote Int
 
 update: Msg -> Model -> Model
 update msg model =
@@ -38,8 +40,9 @@ update msg model =
                 case ( content |> String.trim |> String.length) > 0 of
                     True -> { model | showHide = "inline", current = content}
                     False -> { model | showHide = "none", current = content}
-            Add content -> {model | showHide = "none", current = "", added = model.added ++ [{id = (nextId model.added) ,value = content}]}
+            Add content -> {model | showHide = "none", current = "", added = model.added ++ [{id = (nextId model.added) ,value = content, likes = 0}]}
             Delete id -> {model |  added = (List.filter (\a-> a.id /= id) model.added)}
+            Upvote id -> {model | added = (List.filter (\a-> a.id /= id) model.added) } --Change logic later
 view : Model -> Html Msg
 view model =  div[]
               [
@@ -54,15 +57,23 @@ addValues values =
     div[] (List.map divForPost values)
 
 divForPost : Post -> Html Msg
-divForPost post = div [] [span [] [text post.value], deleteButton post]
+divForPost post = div [class "card", style [ ("width","20rem") ] ] [div[class "card-body"][
+                                                                 p[class "card-text"][text post.value],
+                                                                 deleteButton post,
+                                                                 upvoteButton post
+                                                               ]
+                                                           ]
 
 deleteButton: Post -> Html Msg
-deleteButton post = i [onClick (Delete post.id)][text "delete"]
+deleteButton post = span [onClick (Delete post.id), class "oi oi-trash"][]
 
+
+upvoteButton: Post -> Html Msg
+upvoteButton post = span [onClick (Upvote post.id), class "oi oi-thumb-up"][]
 
 inputBox : Model -> List (Html Msg)
 inputBox model = [input [placeholder "Enter something...", onInput Change, value model.current][],
-                     i[showHideStyle model.showHide, onClick (Add model.current)][text "Add"]]
+                     span[showHideStyle model.showHide, onClick (Add model.current), class "oi oi-check"][]]
 
 showHideStyle: String  -> Attribute msg
 showHideStyle input =
