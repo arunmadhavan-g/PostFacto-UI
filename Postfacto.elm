@@ -100,5 +100,3 @@ nextId  posts  = case posts of
                             case head of
                                 Nothing -> 0
                                 Just val -> val.id + 1
-
-
