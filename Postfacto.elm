@@ -11,15 +11,14 @@ type alias Post =
         value : String,
         likes : Int
     }
-type alias Model =
+type alias Pillar =
     {
         showHide : String,
         current :  String,
         added : List(Post)
     }
 
-
-model : Model
+model : Pillar
 model  =
     {
         showHide = "none",
@@ -33,7 +32,7 @@ type Msg = Change String|
             Delete Int|
             UpVote Int
 
-update: Msg -> Model -> Model
+update: Msg -> Pillar -> Pillar
 update msg model =
         case msg of
             Change content->
@@ -44,7 +43,7 @@ update msg model =
             Delete id -> {model |  added = (List.filter (\a-> a.id /= id) model.added)}
             UpVote id -> {model | added = (updateUpVote model.added id) }
 
-view : Model -> Html Msg
+view : Pillar -> Html Msg
 view model =  div[]
               [
                 div [] (inputBox model),
@@ -81,7 +80,7 @@ upVoteButton post = div[] [
                             h6[][span[class "badge badge-secondary"][text (Basics.toString post.likes)]]
                           ]
 
-inputBox : Model -> List (Html Msg)
+inputBox : Pillar -> List (Html Msg)
 inputBox model = [input [placeholder "Enter something...", onInput Change, value model.current][],
                   span[showHideStyle model.showHide, onClick (Add model.current), class "oi oi-check"][]]
 

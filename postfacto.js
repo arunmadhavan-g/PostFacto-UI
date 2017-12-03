@@ -8395,7 +8395,7 @@ var _user$project$Postfacto$Post = F3(
 	function (a, b, c) {
 		return {id: a, value: b, likes: c};
 	});
-var _user$project$Postfacto$Model = F3(
+var _user$project$Postfacto$Pillar = F3(
 	function (a, b, c) {
 		return {showHide: a, current: b, added: c};
 	});

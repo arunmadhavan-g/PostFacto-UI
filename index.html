@@ -7,11 +7,43 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
+<body class="width:100%">
+<div class="container full-width-div">
+    <div class = "row">
+        <div class="col-sm" id="goods" style="background: lightseagreen; padding: 20px;">
 
+        </div>
+        <div class="col-sm" id="doubts" style="background: gold;padding: 20px;">
+
+        </div>
+        <div class="col-sm" id="bads" style="background: salmon;padding: 20px;">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-sm-4 col-sm" id="actions" style="padding: 30px">
+
+        </div>
+    </div>
+</div>
 <script src ="postfacto.js"></script>
 <script type="text/javascript">
-    var app = Elm.Postfacto.fullscreen();
+    var goodsDiv = document.getElementById("goods")
+    var goodsApp = Elm.Postfacto.embed(goodsDiv);
+
+
+    var doubtsDiv = document.getElementById("doubts")
+    var doubtsApp = Elm.Postfacto.embed(doubtsDiv);
+
+
+    var badsDiv = document.getElementById("bads")
+    var badsApp = Elm.Postfacto.embed(badsDiv);
+
+
+    var actionsDiv = document.getElementById("actions")
+    var actionsApp = Elm.Postfacto.embed(actionsDiv);
+
+
 </script>
 </body>
 </html>

@@ -7,3 +7,11 @@ input{
     border-radius: 5px;
     font-size: medium;
 }
+
+.full-width-div {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right:0;
+}
+
