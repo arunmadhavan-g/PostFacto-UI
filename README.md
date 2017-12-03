@@ -7,3 +7,9 @@ The project is WIP. It will be cleaned up further, integrated with backend in st
 
 Currently developing in small phases. 
 
+To quickly check, just run the index.html. 
+Please note that the postfacto.js may not be the latest and greatest as I might forget to generate a new one. 
+So in case you want to ensure the latest and greatest, generate it as mentioned above. 
+
+
+
